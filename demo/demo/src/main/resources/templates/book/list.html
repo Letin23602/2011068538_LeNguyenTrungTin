@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:replace="~{layout :: link-css}"></th:block>
+  <title>list Nhân Viên</title>
+</head>
+<body>
+<th:block th:replace="~{layout :: header}"></th:block>
+<div class="container">
+  <form class="form-inline d-flex" th:action="@{/books/search}" method="get">
+    <input class="form-control flex-grow-1" type="search" name="searchText" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success flex-grow-1" type="submit">Search</button>
+  </form>
+    <h1 th:text="${title}"></h1>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Mã Nhân Viên</th>
+        <th>Tên Nhân Viên</th>
+        <th>Lương</th>
+        <th>Phòng Ban</th>
+        <th>Action</th>
+      </tr>
+      <tr th:each="book: ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.price}"></td>
+        <td th:text="${book.category.name}"></td>
+        <td>
+          <a th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a>
+          <a th:href="@{/books/delete/{id}(id=${book.id})}" onclick="return confirm('Are you sure about that?')">Delete</a>
+        </td>
+      </tr>
+    </table>
+</div>
+<th:block th:replace="~{layout::footer}"></th:block>
+
+</body>
+</html>
